@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+    <title>Rock, paper, scissors!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../styles.css" type="text/css">
+    <script>var gameID = <%- id %>;</script>
+    <script src="https://cdn.ably.com/lib/ably.min-1.js"></script>
+    <script src="map.js"></script>
+    <script src="common.js"></script>
+    <script src="connection/ably.js"></script>
+</head>
+<body>
+
+<header class="main-header">
+    <h1><a href="/">Rock, paper, scissors!</a></h1>
+    <p>Use arrow keys to move</p>
+</header>
+
+<div class="main-wrapper">
+    <div id="nameinput">
+        <label for="name">Enter a name to start:</label>
+        <input type="text" id="name" name="name" required minlength="1" maxlength="10" size="12">
+        <button onclick="startGame()">Join game!</button> 
+    </div>
+
+    <canvas id="game" width="512" height="512"></canvas>
+    <canvas id="dialog" hidden></canvas>
+
+    <h2>Scoreboard</h2>
+    <ul id="scoreboard">
+    </ul>
+
+    <h2>Rules</h2>
+    <p>You will appear on a map as a hand. You will be either <strong>rock, paper or scissors</strong>.</p>
+    <p>If you collide with another player, then one of you will be defeated if you are different hand shape.</p>
+    <ul>
+        <li>Paper defeats rock</li>
+        <li>Rock defeats scissors</li>
+        <li>Scissors defeats paper</li>
+    </ul>
+    <p>Every 10 seconds, everyone's colour and shape will change. The last square standing wins. Good luck!</p>
+
+    <footer class="main-footer">
+        <p>Source code on <a href="https://github.com/ably-labs/rockpaperscissors" target="_top">the Github repository</a>.</p>
+    </footer>
+    <script src="loader.js"></script>
+    <script src="keyboard.js"></script>
+    <script src="camera.js"></script>
+    <script src="player.js"></script>
+    <script src="game.js"></script>
+</div>
+
+</body>
+</html>
