@@ -2,9 +2,7 @@ function AblyHandler(player) {
 	// TODO: Replace with authUrl
 	this.connection = new Ably.Realtime.Promise({authUrl: '/token', clientId: player.id,   
 	  plugins: {
-	    vcdiff: {
-	      decode: vcdiffDecoder
-	    }
+	  	vcdiff: vcdiffDecoder
 	  }});
 	this.stateChannel = this.connection.channels.get('states:' + gameID, { params: { delta: 'vcdiff' } });
 	this.shouldChangeColor = false;
