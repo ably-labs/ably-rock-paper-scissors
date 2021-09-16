@@ -1,5 +1,8 @@
 const express = require('express');
 const Ably = require('ably');
+const dotenv = require('dotenv');
+dotenv.config();
+
 const app = express();
 
 let ably = new Ably.Realtime(process.env.API_KEY);
