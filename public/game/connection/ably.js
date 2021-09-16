@@ -6,7 +6,7 @@ function AblyHandler(player) {
 	      decode: vcdiffDecoder
 	    }
 	  }});
-	this.stateChannel = this.connection.channels.get('states:' + gameID, {delta: 'vcdiff'});
+	this.stateChannel = this.connection.channels.get('states:' + gameID, { params: { delta: 'vcdiff' } });
 	this.shouldChangeColor = false;
 
 	this.stateChannel.subscribe('update-colors', (msg) => {
