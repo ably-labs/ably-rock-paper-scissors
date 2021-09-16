@@ -1,22 +1,20 @@
-function AblyHandler(player) {
+function AblyHandler(playerz) {
 	// TODO: Replace with authUrl
-	this.connection = new Ably.Realtime.Promise({authUrl: '/token', clientId: player.id});
+	this.playerz = playerz;
+	this.connection = new Ably.Realtime.Promise({ authUrl: '/token' });
 	this.stateChannel = this.connection.channels.get('states:' + gameID);
 	this.shouldChangeColor = false;
 
-	this.stateChannel.subscribe('update-colors', (msg) => {
-			this.shouldChangeColor = true;
+	this.stateChannel.subscribe((msg) => {
+			playerz[msg.data.id].alive = false;
+			this.updateState(playerz[msg.data.id]);
+			setTimeout(() => {playerz[msg.data.id].respawn(); }, 3000);
 		}
 	);
 
-	this.stateChannel.subscribe(player.id, (msg) => {
-			player.alive = false;
-			this.updateState(player);
-			setTimeout(() => {player.respawn(); }, 3000);
-		}
-	);
-
-	this.joinState(copyWithoutMap(player));
+	for (let player in playerz) {
+		this.joinState(player);
+	}
 }
 
 AblyHandler.prototype.sendMessage = function(name, message) {
@@ -27,16 +25,21 @@ AblyHandler.prototype.changeColors = function() {
 	this.stateChannel.publish('update-colors', null);
 }
 
+let bb = 0;
 AblyHandler.prototype.joinState = function (player) {
-	this.stateChannel.presence.enter(copyWithoutMap(player));
+	bb++;
+	console.log(bb);
+	this.stateChannel.presence.enterClient(player.id, copyWithoutMap(player));
 };
 
 AblyHandler.prototype.updateState = function (player) {
-    this.stateChannel.presence.update(copyWithoutMap(player));
+	console.log(player.id);
+    this.stateChannel.presence.updateClient(player.id, copyWithoutMap(player));
 };
 
-AblyHandler.prototype.getState = async function (playerName) {
-    const me = await this.stateChannel.presence.get({ clientId: playerName});
+AblyHandler.prototype.getState = async function (playerId) {
+	console.log(playerId);
+    const me = await this.stateChannel.presence.get({ clientId: playerId });
     return me;
 };
 

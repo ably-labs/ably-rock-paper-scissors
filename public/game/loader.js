@@ -2,10 +2,6 @@ let Loader = {
     images: {}
 };
 
-let frameCount = 0;
-const fps = 10;
-let fpsInterval, startTime, now, then, elapsed;
-
 Loader.loadImage = function (key, src) {
     let img = new Image();
 

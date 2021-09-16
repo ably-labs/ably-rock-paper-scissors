@@ -1,6 +1,18 @@
 const sqrt2 = Math.sqrt(1/2);
 
+let scale = 4096;
+
 let Game = {};
+
+let numPlayers = 395;
+
+let frameCount = 0;
+const fps = 5;
+let fpsInterval, startTime, now, then, elapsed;
+
+let playerz = [];
+
+image = Loader.getImage('player');
 
 Game.run = function (context) {
     this.ctx = context;
@@ -28,7 +40,7 @@ Game.tick = function (elapsed) {
         then = now - (elapsed % fpsInterval);
 
         // clear previous frame
-        this.ctx.clearRect(0, 0, 512, 512);
+        this.ctx.clearRect(0, 0, scale, scale);
 
         var delta = (elapsed - this._previousElapsed) / 1000.0;
         delta = Math.min(delta, 0.25); // maximum delta of 250 ms
@@ -51,9 +63,17 @@ Game.init = function (name) {
         [Keyboard.LEFT, Keyboard.RIGHT, Keyboard.UP, Keyboard.DOWN]);
     this.tileAtlas = Loader.getImage('tiles');
 
-    this.myPlayer = new Player(map, name, randomInt(64, 64 * (width - 1)), randomInt(64, 64 * (height - 1)));
-    this.ablyHandler = new AblyHandler(this.myPlayer);
-    this.camera = new Camera(map, 512, 512);
+    // this.myPlayer = new Player(map, name, randomInt(64, 64 * (width - 1)), randomInt(64, 64 * (height - 1)));
+
+    for (let v=0; v < numPlayers; v++) {
+        let idz = uuidv4();
+        playerz[idz] = new Player(map, uuidv4(), randomInt(64, 64 * (width - 1)), randomInt(64, 64 * (height - 1)));
+    }
+
+    image = Loader.getImage('player');
+
+    this.ablyHandler = new AblyHandler(playerz);
+    this.camera = new Camera(map, scale, scale);
     this.camera.follow(this.myPlayer);
     this.waitingForDeath = new Set();
 
@@ -63,40 +83,38 @@ Game.init = function (name) {
 let frame = 0;
 
 Game.update = function (delta) {
-    if (this.myPlayer.respawned) {
-        this.myPlayer.respawned = false;
-        this.ablyHandler.updateState(this.myPlayer);
+    for (const [idz, player] of Object.entries(playerz)) {
+        if (player.respawned) {
+            player.respawned = false;
+            this.ablyHandler.updateState(player);
+        }
+
+        frame++;
+        // handle my player's movement with arrow keys
+        let dirx = randomInt(-1, 1);
+        let diry = randomInt(-1, 1);
+
+        let sum = Math.abs(dirx) + Math.abs(diry);
+        if (sum == 2) {
+            dirx *= sqrt2;
+            diry *= sqrt2;
+        }
+
+        player.move(delta, dirx, diry);
+
+        if (player.moved) {
+            player.moved = false;
+            this.ablyHandler.updateState(player);
+        }
+
+        if (this.ablyHandler.shouldChangeColor) {
+            this.ablyHandler.shouldChangeColor = false;
+            player.newColor();
+            this.ablyHandler.updateState(player);
+        }
+
+        this.checkIfPlayerDied();
     }
-
-    frame++;
-    // handle my player's movement with arrow keys
-    let dirx = 0;
-    let diry = 0;
-    if (Keyboard.isDown(Keyboard.LEFT)) { dirx = -1; }
-    else if (Keyboard.isDown(Keyboard.RIGHT)) { dirx = 1; }
-    if (Keyboard.isDown(Keyboard.UP)) { diry = -1; }
-    else if (Keyboard.isDown(Keyboard.DOWN)) { diry = 1; }
-
-    let sum = Math.abs(dirx) + Math.abs(diry);
-    if (sum == 2) {
-        dirx *= sqrt2;
-        diry *= sqrt2;
-    }
-
-    this.myPlayer.move(delta, dirx, diry);
-
-    if (this.myPlayer.moved) {
-        this.myPlayer.moved = false;
-        this.ablyHandler.updateState(this.myPlayer);
-    }
-
-    if (this.ablyHandler.shouldChangeColor) {
-        this.ablyHandler.shouldChangeColor = false;
-        this.myPlayer.newColor();
-        this.ablyHandler.updateState(this.myPlayer);
-    }
-
-    this.checkIfPlayerDied();
 
     this.camera.update();
 };
@@ -105,17 +123,19 @@ Game.checkIfPlayerDied = async function() {
     let players = await this.ablyHandler.playerPositions();
 
     for (const player of players) {
-        if (player.data == undefined || !player.data.alive) {
-            continue;
-        }
+        for (const player2 of playerz) {
+            if (player.data == undefined || !player.data.alive) {
+                continue;
+            }
 
-        if (this.myPlayer.id != player.data.id && this.myPlayer.alive && this.myPlayerWins(this.myPlayer, player.data) && 
-            this.playersAreTouching(this.myPlayer, player.data)) {
+            if (player2.id != player.data.id && player2.alive && this.myPlayerWins(player2, player.data) && 
+                this.playersAreTouching(player2, player.data)) {
 
-            this.waitingForDeath.add(player.data.id);
-            this.ablyHandler.sendMessage(player.data.id, 'kill');
+                this.waitingForDeath.add(player.data.id);
+                this.ablyHandler.sendMessage(player.data.id, 'kill');
+            }
         }
-    }    
+    }
 }
 
 Game.myPlayerLoses = function(player1, player2) {
@@ -195,10 +215,10 @@ Game.render = function () {
 
     this._drawGrid();
 
-    if (!this.myPlayer.alive) {
-        this.ctx.font = '20px serif';
-        this.ctx.fillText("You died! You'll respawn soon...", 100, 100);
-    }
+    // if (!this.myPlayer.alive) {
+    //     this.ctx.font = '20px serif';
+    //     this.ctx.fillText("You died! You'll respawn soon...", 100, 100);
+    // }
 };
 
 Game.renderPlayers = async function() {
@@ -215,7 +235,7 @@ Game.renderPlayers = async function() {
 
         if (!player.data.alive && this.waitingForDeath.has(player.data.id)) {
             this.waitingForDeath.delete(player.data.id);
-            this.myPlayer.score++;
+            // this.myPlayer.score++;
         }
         this.drawPlayer(player.data);
     }
@@ -243,7 +263,7 @@ Game.drawPlayer = function (player) {
     let y = player.y - this.camera.y;
 
     this.ctx.drawImage(
-        this.myPlayer.image, // image
+        image, // image
         player.color * player.width, // source x
         Math.floor(frame / 2 % 2) * map.tsize,  // source y
         player.width, // source width
