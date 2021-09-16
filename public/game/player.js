@@ -41,13 +41,12 @@ Player.prototype.move = function (delta, dirx, diry) {
     if (this.x != oldX || this.y != oldY) {
         this.moved = true;
     }
-};
+}
 
 Player.prototype.respawn = function () {
     this.alive = true;
     this.respawned = true;
 
-    console.log(this.respawned);
     this.x = randomInt(64, 64 * (width - 1));
     this.y = randomInt(64, 64 * (height - 1));
 }
