@@ -19,7 +19,10 @@ function updateList(ranks) {
     let ul = document.getElementById("scoreboard"); 
     for (let i=0; i < ranks.length; i++) {
         let li = document.createElement("li");
-        li.appendChild(document.createTextNode(ranks[i].name + " - " + ranks[i].score));
+        let span = document.createElement("span");
+        span.appendChild(document.createTextNode(ranks[i].score));
+        li.appendChild(document.createTextNode(ranks[i].name));
+        li.appendChild(span);
         ul.appendChild(li);
     }
 }
