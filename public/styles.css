@@ -1,57 +1,72 @@
+:root {
+    --dark-grey: #333;
+    --primary: #ED760A;
+    --secondary: #c76306;
+}
+
 body {
     font-family: 'Source Code Pro', 'Courier', monospace;
     margin: 0;
 }
 
 canvas {
-    background: #000;
-}
-
-a, a:hover, a:visited {
-    color: #000;
-    text-decoration: none;
+    margin-bottom: 1rem;
+    background: #fff;
+    border: 2px solid black;
 }
 
 a {
-    border-bottom: 2px solid #333333;
+    color:#ED760A;
+    text-decoration: none;
 }
 
-a:hover {
-    background:#333333;
+a:hover, 
+a:visited {
+    color :var(--secondary);
+    text-decoration: underline;
 }
 
-.main-wrapper {
+.logo {
+    color: white;
+}
+
+header {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ED760A;
+}
+
+header, footer {
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+h2 {
+    text-align: center;
+    font-size: 3em;
+    margin: 1rem;
+}
+
+h3 {
+    margin: 0;
+    text-align: center;
+}
+
+main {
     width: 512px;
     padding-left: 1em;
     padding-right: 1em;
     margin: 0 auto;
 }
 
-.main-header, .main-footer {
-    text-align: center;
-}
-
-.subtitle {
-    font-size: 1.5em;
-}
-
-.main-header {
-    margin-top: 0;
-    margin-bottom: 2em;
-}
-
-.main-header h1 {
-    margin: 0;
-    background: #ED760A;
-    padding: 0.5em 1em;
-}
-
-.main-header a {
-    color: #000;
-    text-decoration: none;
-}
-
-.main-footer {
+footer {
     margin-top: 2em;
 }
 
@@ -63,9 +78,109 @@ li {
     margin: 0.5em 0;
 }
 
+.start {
+    display: block;
+    width: 120px;
+    height: 100px;
+    margin: 0 auto;
+    border: 0;
+    font-size: 0;
+    color: transparent;
+    background: url(./assets/play.png) no-repeat center;
+    background-size: 120px;
+    cursor: pointer;
+}
+
+.start:hover {
+    background: url(./assets/play-pressed.png);
+    background-size: 120px;
+}
+
 #dialog {
   background: rgba(255,255,255,.5);
   position: absolute;
   left: 0;
   top: 0;
+}
+
+.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+
+.nameinput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2em;
+}
+
+label {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.name {
+    min-width: 150px;
+    margin-left:1em;
+    padding: .5em;
+    border: 2px solid black;
+    border-right: 0;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    font-size: 1rem;
+}
+
+.join {
+    padding: .5em;
+    border: 2px solid black;
+    border-radius: 0px;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: #ED760A;
+    cursor: pointer;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.join:hover {
+    background-color: #c76306;
+}
+
+.game {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.scoreboard {
+    width: max-content;
+    min-width: 300px;
+    margin-left: 20px;
+    background-color: black;
+    color: white;
+    border: 2px solid #ED760A;
+    font-family: 'VT323', monospace;
+    letter-spacing: 1px;
+}
+
+.scores {
+    list-style: none;
+    padding: 0;
+    height: 416px;
+    overflow-y: auto;
+}
+
+.scores li {
+    font-size: 2rem;
+    margin: 0.25rem 1rem; 
+    border-bottom: 1px solid #353535;
+}
+
+.scores span {
+    float: right;
+}
+
+.rules {
+    max-width: 960px;
+    margin: 0 auto;
 }
