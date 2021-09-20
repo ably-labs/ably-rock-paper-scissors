@@ -5,7 +5,7 @@ function startGame() {
 
     let nameInputDiv = document.getElementById("nameinput");
 
-    nameInputDiv.hidden = true;
+    nameInputDiv.style.visibility = "hidden";
 
     let context = document.getElementById('game').getContext('2d');
     Game.run(context);
