@@ -1,5 +1,5 @@
-const height = 12;
-const width = 12;
+const height = 20;
+const width = 20;
 
 let map = {
     cols: width,

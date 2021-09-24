@@ -30,3 +30,14 @@ function updateList(ranks) {
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+
+let input = document.getElementById("name");
+
+
+function startKeyDown() {
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    startGame();
+  }
+}
