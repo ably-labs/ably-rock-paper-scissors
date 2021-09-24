@@ -36,7 +36,7 @@
 <div class="main-wrapper">
     <div class="nameinput" id="nameinput">
         <label for="name">Enter a name to start:</label>
-        <input class="name" type="text" id="name" name="name" required minlength="1" maxlength="10" size="12">
+        <input class="name" type="text" id="name" name="name" onkeydown="startKeyDown()" required minlength="1" maxlength="10" size="12">
         <button class="join" onclick="startGame()">Join game!</button> 
     </div>
     
@@ -63,7 +63,7 @@
     </section>
 
     <footer>
-        <p>Source code on <a href="https://github.com/ably-labs/rockpaperscissors" target="_top">the Github repository</a>.</p>
+        <p>Source code on <a href="https://github.com/ably-labs/ably-rock-paper-scissors" target="_top">the Github repository</a>.</p>
     </footer>
     <script src="loader.js"></script>
     <script src="keyboard.js"></script>
