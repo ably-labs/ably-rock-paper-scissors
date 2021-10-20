@@ -116,14 +116,16 @@ Game.update = function (delta) {
 };
 
 var mouseDown = 0;
-document.body.onmousedown = function() { 
+
+let gameCanvas = document.getElementById("game");
+gameCanvas.onmousedown = function(e) { 
+  e.preventDefault();
   ++mouseDown;
 }
 document.body.onmouseup = function() {
   --mouseDown;
 }
 
-let gameCanvas = document.getElementById("game");
 // $("#game").mousedown(function(event){
 //     event.preventDefault();
 // });
