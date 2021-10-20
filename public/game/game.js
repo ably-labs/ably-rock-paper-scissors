@@ -173,17 +173,18 @@ canvas.addEventListener("touchstart", function (e) {
   var touch = e.touches[0];
   pointerX = touch.clientX;
   pointerY = touch.clientY;
+  e.preventDefault();
 }, false);
 canvas.addEventListener("touchend", function (e) {
   mouseDown = false;
 }, false);
 canvas.addEventListener("touchmove", function (e) {
-  // var touch = e.touches[0];
-  // var mouseEvent = new MouseEvent("mousemove", {
-  //   clientX: touch.clientX,
-  //   clientY: touch.clientY
-  // });
-  // canvas.dispatchEvent(mouseEvent);
+  var touch = e.touches[0];
+  var mouseEvent = new MouseEvent("mousemove", {
+    clientX: touch.clientX,
+    clientY: touch.clientY
+  });
+  canvas.dispatchEvent(mouseEvent);
 }, false);
 
 // Get the position of a touch relative to the canvas
