@@ -120,6 +120,7 @@ var mouseDown = 0;
 let gameCanvas = document.getElementById("game");
 gameCanvas.onmousedown = function(e) { 
   mouseDown = true;
+  e.preventDefault();
 }
 document.body.onmouseup = function() {
   mouseDown = false;
