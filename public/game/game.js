@@ -179,12 +179,11 @@ canvas.addEventListener("touchend", function (e) {
   mouseDown = false;
 }, false);
 canvas.addEventListener("touchmove", function (e) {
+  mouseDown = true;
+  mousePos = getTouchPos(canvas, e);
   var touch = e.touches[0];
-  var mouseEvent = new MouseEvent("mousemove", {
-    clientX: touch.clientX,
-    clientY: touch.clientY
-  });
-  canvas.dispatchEvent(mouseEvent);
+  pointerX = touch.clientX;
+  pointerY = touch.clientY;
 }, false);
 
 // Get the position of a touch relative to the canvas
