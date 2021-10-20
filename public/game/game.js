@@ -119,7 +119,6 @@ var mouseDown = 0;
 
 let gameCanvas = document.getElementById("game");
 gameCanvas.onmousedown = function(e) { 
-  e.preventDefault();
   mouseDown = true;
 }
 document.body.onmouseup = function() {
@@ -156,11 +155,6 @@ function getCursorPosition(myPlayer, camera) {
         return null;
     }
 
-    console.log(canvasRect.left + " BOOP")
-        console.log(canvasRect.right + " BAAP")
-    console.log(myPlayer.x + " PLAYX")
-    console.log(pointerX + " OOOO");
-
     let playerMiddleX = myPlayer.x + (myPlayer.width / 2);
     let playerMiddleY = myPlayer.y + (myPlayer.height / 2);
 
@@ -173,25 +167,22 @@ function getCursorPosition(myPlayer, camera) {
 
 // Set up touch events for mobile, etc
 canvas.addEventListener("touchstart", function (e) {
+  mouseDown = true;
   mousePos = getTouchPos(canvas, e);
   var touch = e.touches[0];
-  var mouseEvent = new MouseEvent("mousedown", {
-    clientX: touch.clientX,
-    clientY: touch.clientY
-  });
-  canvas.dispatchEvent(mouseEvent);
+  pointerX = touch.clientX;
+  pointerY = touch.clientY;
 }, false);
 canvas.addEventListener("touchend", function (e) {
-  var mouseEvent = new MouseEvent("mouseup", {});
-  canvas.dispatchEvent(mouseEvent);
+  mouseDown = false;
 }, false);
 canvas.addEventListener("touchmove", function (e) {
-  var touch = e.touches[0];
-  var mouseEvent = new MouseEvent("mousemove", {
-    clientX: touch.clientX,
-    clientY: touch.clientY
-  });
-  canvas.dispatchEvent(mouseEvent);
+  // var touch = e.touches[0];
+  // var mouseEvent = new MouseEvent("mousemove", {
+  //   clientX: touch.clientX,
+  //   clientY: touch.clientY
+  // });
+  // canvas.dispatchEvent(mouseEvent);
 }, false);
 
 // Get the position of a touch relative to the canvas
