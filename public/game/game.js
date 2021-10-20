@@ -180,7 +180,6 @@ canvas.addEventListener("touchstart", function (e) {
     clientY: touch.clientY
   });
   canvas.dispatchEvent(mouseEvent);
-  e.preventDefault();
 }, false);
 canvas.addEventListener("touchend", function (e) {
   var mouseEvent = new MouseEvent("mouseup", {});
