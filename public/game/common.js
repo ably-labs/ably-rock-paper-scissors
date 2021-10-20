@@ -34,7 +34,6 @@ function randomInt(min, max) {
 
 let input = document.getElementById("name");
 
-
 function startKeyDown() {
   if (event.keyCode === 13) {
     event.preventDefault();

@@ -83,6 +83,20 @@ Game.update = function (delta) {
         diry *= sqrt2;
     }
 
+    if (gameCanvas.getBoundingClientRect()) {
+        let cursorPos = getCursorPosition(this.myPlayer, this.camera);
+        if (mouseDown && cursorPos != null) {
+            let absX = Math.abs(cursorPos.x);
+            let absY = Math.abs(cursorPos.y);
+            let abss = absX + absY;
+            let xRatio = cursorPos.x / abss;
+            let yRatio = cursorPos.y / abss;
+
+            dirx = xRatio * -1;
+            diry = yRatio * -1;
+        }
+    }
+
     this.myPlayer.move(delta, dirx, diry);
 
     if (this.myPlayer.moved) {
@@ -100,6 +114,61 @@ Game.update = function (delta) {
 
     this.camera.update();
 };
+
+var mouseDown = 0;
+document.body.onmousedown = function() { 
+  ++mouseDown;
+}
+document.body.onmouseup = function() {
+  --mouseDown;
+}
+
+let gameCanvas = document.getElementById("game");
+// $("#game").mousedown(function(event){
+//     event.preventDefault();
+// });
+
+function getCursorPosition(myPlayer, camera) {
+    let canvasRect = gameCanvas.getBoundingClientRect();
+    let a = canvasRect.right < pointerX;
+    let b = canvasRect.left > pointerX;
+    let c = canvasRect.bottom < pointerY;
+    let d = canvasRect.top > pointerY;
+    if (canvasRect.right < pointerX
+        || canvasRect.left > pointerX
+        || canvasRect.bottom < pointerY
+        || canvasRect.top > pointerY
+        ) {
+        return null;
+    }
+
+    console.log(canvasRect.left + " BOOP")
+        console.log(canvasRect.right + " BAAP")
+    console.log(myPlayer.x + " PLAYX")
+    console.log(pointerX + " OOOO");
+
+    let playerMiddleX = myPlayer.x + (myPlayer.width / 2);
+    let playerMiddleY = myPlayer.y + (myPlayer.height / 2);
+
+    let mousePos = {
+        "x" : (playerMiddleX + canvasRect.left) - pointerX - camera.x, 
+        "y" : (playerMiddleY + canvasRect.top) - pointerY - camera.y
+    };
+    return mousePos;
+}
+
+var pointerX = 0;
+var pointerY = 0;
+
+document.onmousemove = function(event) {
+    pointerX = event.clientX;
+    pointerY = event.clientY;
+}
+
+const canvas = document.querySelector('canvas')
+canvas.addEventListener('mousedown', function(e) {
+    getCursorPosition(canvas, e)
+})
 
 Game.checkIfPlayerDied = async function() {
     let players = await this.ablyHandler.playerPositions();

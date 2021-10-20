@@ -15,10 +15,10 @@ const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
   res.render('index');
-})
+});
 
 app.get('/game', function(req, res) {
-  res.redirect('/game/' + randomInt(0, 1000000));
+  res.redirect('/game/1');
 });
 
 app.get('/game/:id', function(req, res) {
