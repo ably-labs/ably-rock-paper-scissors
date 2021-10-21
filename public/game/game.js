@@ -1,5 +1,11 @@
 const sqrt2 = Math.sqrt(1/2);
 
+let screenWidth = window.screen.width;
+if (screenWidth > 512) {
+    screenWidth = 512;
+}
+screenWidth -= (screenWidth % 64);
+
 let Game = {};
 
 Game.run = function (context) {
@@ -28,7 +34,7 @@ Game.tick = function (elapsed) {
         then = now - (elapsed % fpsInterval);
 
         // clear previous frame
-        this.ctx.clearRect(0, 0, 512, 512);
+        this.ctx.clearRect(0, 0, screenWidth, screenWidth);
 
         var delta = (elapsed - this._previousElapsed) / 1000.0;
         delta = Math.min(delta, 0.25); // maximum delta of 250 ms
@@ -53,7 +59,7 @@ Game.init = function (name) {
 
     this.myPlayer = new Player(map, name, randomInt(64, 64 * (width - 1)), randomInt(64, 64 * (height - 1)));
     this.ablyHandler = new AblyHandler(this.myPlayer);
-    this.camera = new Camera(map, 512, 512);
+    this.camera = new Camera(map, screenWidth, screenWidth);
     this.camera.follow(this.myPlayer);
     this.waitingForDeath = new Set();
 
@@ -61,6 +67,8 @@ Game.init = function (name) {
 };
 
 let frame = 0;
+
+let gameCanvas = document.getElementById("game");
 
 Game.update = function (delta) {
     if (this.myPlayer.respawned) {
@@ -117,7 +125,6 @@ Game.update = function (delta) {
 
 var mouseDown = 0;
 
-let gameCanvas = document.getElementById("game");
 gameCanvas.onmousedown = function(e) { 
   mouseDown = true;
   e.preventDefault();
@@ -141,6 +148,9 @@ const canvas = document.querySelector('canvas')
 canvas.addEventListener('mousedown', function(e) {
     getCursorPosition(canvas, e)
 })
+
+canvas.height = screenWidth;
+canvas.width = screenWidth;
 
 function getCursorPosition(myPlayer, camera) {
     let canvasRect = gameCanvas.getBoundingClientRect();

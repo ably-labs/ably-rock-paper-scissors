@@ -13,8 +13,8 @@ Camera.prototype.follow = function (sprite) {
 
 Camera.prototype.update = function () {
     // make the camera follow the sprite
-    this.x = this.x + ((this.following.x - this.width / 2) - this.x) / 10;
-    this.y = this.y + ((this.following.y - this.height / 2) - this.y) / 10;
+    this.x = this.x + ((this.following.x - this.width / 2) - this.x) / 2;
+    this.y = this.y + ((this.following.y - this.height / 2) - this.y) / 2;
 
     // clamp values
     this.x = Math.max(0, Math.min(this.x, this.maxX));
