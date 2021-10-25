@@ -3,7 +3,7 @@ let Loader = {
 };
 
 let frameCount = 0;
-const fps = 10;
+const fps = 5;
 let fpsInterval, startTime, now, then, elapsed;
 
 Loader.loadImage = function (key, src) {
