@@ -26,6 +26,22 @@ a:visited {
     text-decoration: underline;
 }
 
+.parent {
+  display:inline-grid;
+  grid-template-columns:auto auto;
+  grid-template-rows:1fr 1fr 1fr 1fr;
+}
+
+.parent > div {
+  padding:20px;
+}
+
+.child1 {
+  grid-column:1;
+  grid-row:1/4;
+  width: 1280px;
+}
+
 .logo {
     color: white;
 }
