@@ -1,11 +1,6 @@
 function startGame() {
-    let nameField = document.getElementById("name");
-    name = nameField.value;
+    name = "Test";
     if (!name) return;
-
-    let nameInputDiv = document.getElementById("nameinput");
-
-    nameInputDiv.style.visibility = "hidden";
 
     let context = document.getElementById('game').getContext('2d');
     Game.run(context);

@@ -33,6 +33,7 @@ a:visited {
 }
 
 .parent > div {
+    outline:1px solid #000;
   padding:20px;
 }
 
@@ -49,8 +50,8 @@ a:visited {
 header {
     height: 80px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
     background: #ED760A;
 }
 
