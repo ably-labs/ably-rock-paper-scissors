@@ -24,20 +24,21 @@
 
 <div class="main-wrapper">
     <div class="parent">
-        <div class="child1">
-            <canvas id="game" width="512" height="512" ondragstart="return false;" ondrop="return false;" user-select:none;></canvas>
-        </div>
-        <div class="child2" style="display: flex;">            
+        <canvas id="game" width="512" height="512" ondragstart="return false;" ondrop="return false;" user-select:none;></canvas>
+        <div class="score">            
             <div class="scoreboard">
               <h2>Scoreboard</h2>
               <ul class="scores" id="scoreboard">
               </ul>
             </div>
-            <div style="padding-left: 55px;"><img src="../qr.png"  width="700" height="700"></div>
         </div>
-        <div class="child3">
-            <h3 style="width: 50%; font-size: xx-large;">Want to build something cool with realtime communications? Check out the Hackathon at <a href="lol">https://github.com/ably-labs/Gophercon-Hackathon</a></h3>
-            <div><img src="../hackathon.png"  width="600" height="600"></div>
+        <div class="joinin">
+            <h2 class="joinin-title">Join the game!</h2>
+            <img src="../qr.png" class="qr">
+            <div class="hackathon">
+                <h3 class="hackthon-title">Want to build something cool with realtime communications? <br>Check out the Hackathon at: <br><a href="lol" class="hackathon-link">https://github.com/ably-labs/Gophercon-Hackathon</a></h3>
+                <img src="../hackathon.png" class="hackathon-qr">
+            </div>
         </div>
     </div>
 
