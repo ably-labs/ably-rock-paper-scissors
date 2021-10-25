@@ -33,7 +33,7 @@
             </svg></a>
     </header>
 
-<div class="main-wrapper">
+<div class="main-wrapper" id="main">
     <div class="nameinput" id="nameinput">
         <label for="name">Enter a name to start:</label>
         <input class="name" type="text" id="name" name="name" onkeydown="startKeyDown()" required minlength="1" maxlength="10" size="12">
@@ -44,7 +44,7 @@
         <h3>Use arrow keys to move, or hold down on a touchscreen where you wish to move to</h3>
     </section>
     <section class="game">
-        <canvas id="game" width="512" height="512" ondragstart="return false;" ondrop="return false;" user-select:none;></canvas>
+        <canvas id="game" ondragstart="return false;" ondrop="return false;" user-select:none;></canvas>
         <div class="scoreboard">
             <h2>Scoreboard</h2>
             <ul class="scores" id="scoreboard">

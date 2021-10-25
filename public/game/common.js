@@ -3,9 +3,7 @@ function startGame() {
     name = nameField.value;
     if (!name) return;
 
-    let nameInputDiv = document.getElementById("nameinput");
-
-    nameInputDiv.style.visibility = "hidden";
+    document.body.classList.add("playing");
 
     let context = document.getElementById('game').getContext('2d');
     Game.run(context);

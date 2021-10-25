@@ -10,9 +10,10 @@ body {
 }
 
 canvas {
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
     background: #fff;
     border: 2px solid black;
+    width: calc(100vw - 30px);
 }
 
 a {
@@ -31,21 +32,17 @@ a:visited {
 }
 
 header {
-    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #ED760A;
-}
-
-header, footer {
-    margin-bottom: 2em;
-    text-align: center;
+    margin-bottom: 10px;
 }
 
 h1 {
-    font-size: 3rem;
-    margin: 0;
+    font-size: clamp(1rem, 6vw, 3rem);
+    margin: 10px;
+    text-align: center;
 }
 
 h2 {
@@ -55,12 +52,11 @@ h2 {
 }
 
 h3 {
-    margin: 0;
+    margin: 0 0 10px;
     text-align: center;
 }
 
 main {
-    width: 512px;
     padding-left: 1em;
     padding-right: 1em;
     margin: 0 auto;
@@ -103,22 +99,25 @@ li {
   top: 0;
 }
 
-.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
-
 .nameinput {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    margin-bottom: 2em;
+    margin-bottom: 1rem;
 }
 
 label {
+    display: block;
     font-weight: bold;
     font-size: 1.4rem;
+    text-align: center;
+    width: 100%;
+    flex-shrink: 0;
 }
 
 .name {
-    min-width: 150px;
+    min-width: 200px;
     margin-left:1em;
     padding: .5em;
     border: 2px solid black;
@@ -150,15 +149,19 @@ label {
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: center;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.playing .game {
+    max-height: max-content;
 }
 
 .scoreboard {
-    width: max-content;
-    min-width: 300px;
-    margin-left: 20px;
+    width: calc(100vw - 30px);
     background-color: black;
     color: white;
-    border: 2px solid #ED760A;
+    border: 2px solid black;
     font-family: 'VT323', monospace;
     letter-spacing: 1px;
 }
@@ -183,4 +186,56 @@ label {
 .rules {
     max-width: 960px;
     margin: 0 auto;
+    padding: 0 10px;
+}
+
+.playing .nameinput {
+    display: none;
+}
+
+.github-corner {
+    display: none;
+}
+
+footer {
+    padding: 0 10px;
+    text-align: center;
+}
+
+@media screen and (min-width: 650px) {
+    header {
+        height: 80px;
+        margin-bottom: 2rem;
+    }
+    
+    .nameinput {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2em;
+    }
+
+    label {
+        text-align: left;
+        width: max-content;
+    }
+
+    canvas {
+        margin-bottom: 1rem;
+        max-width: 512px;
+    }
+
+    .scoreboard {
+        width: max-content;
+        min-width: 300px;
+        margin-left: 20px;
+    }
+
+    .github-corner {
+        display: block;
+    }
+
+    .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+
+
 }
