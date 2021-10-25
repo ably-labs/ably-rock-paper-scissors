@@ -23,19 +23,19 @@ function AblyHandler(player) {
 }
 
 AblyHandler.prototype.sendMessage = function(name, message) {
-	this.stateChannel.publish(name, message);
+	// this.stateChannel.publish(name, message);
 }
 
 AblyHandler.prototype.changeColors = function() {
-	this.stateChannel.publish('update-colors', null);
+	// this.stateChannel.publish('update-colors', null);
 }
 
 AblyHandler.prototype.joinState = function (player) {
-	this.stateChannel.presence.enter(copyWithoutMap(player));
+	// this.stateChannel.presence.enter(copyWithoutMap(player));
 };
 
 AblyHandler.prototype.updateState = function (player) {
-    this.stateChannel.presence.update(copyWithoutMap(player));
+    // this.stateChannel.presence.update(copyWithoutMap(player));
 };
 
 AblyHandler.prototype.getState = async function (playerName) {

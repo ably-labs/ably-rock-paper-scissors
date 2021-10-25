@@ -1,10 +1,10 @@
 const sqrt2 = Math.sqrt(1/2);
 
-let screenWidth = window.screen.width;
-if (screenWidth > 512) {
-    screenWidth = 512;
-}
-screenWidth -= (screenWidth % 64);
+let screenWidth = 1280;
+// if (screenWidth > 512) {
+//     screenWidth = 512;
+// }
+// screenWidth -= (screenWidth % 64);
 
 let Game = {};
 
