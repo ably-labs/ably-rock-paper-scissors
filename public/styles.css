@@ -10,7 +10,7 @@ body {
 }
 
 canvas {
-    margin-bottom: 1rem;
+    height: calc(100vh - 110px);
     background: #fff;
     border: 2px solid black;
 }
@@ -27,20 +27,12 @@ a:visited {
 }
 
 .parent {
-  display:inline-grid;
-  grid-template-columns:auto auto;
-  grid-template-rows:1fr 1fr 1fr 1fr;
-}
-
-.parent > div {
-    outline:1px solid #000;
-  padding:20px;
-}
-
-.child1 {
-  grid-column:1;
-  grid-row:1/4;
-  width: 1280px;
+  display: grid;
+  grid-template-columns: calc(100vh - 110px) 400px 1fr;
+  grid-template-rows: auto 1fr;
+  grid-gap: calc(1rem + 4px);
+  margin: 1rem;
+  margin-right: 0;
 }
 
 .logo {
@@ -50,18 +42,14 @@ a:visited {
 header {
     height: 80px;
     display: flex;
-    justify-content: left;
-    align-items: left;
+    justify-content: flex-start;
+    align-items: center;
     background: #ED760A;
-}
-
-header, footer {
-    margin-bottom: 2em;
-    text-align: center;
 }
 
 h1 {
     font-size: 3rem;
+    padding-left: 2rem;
     margin: 0;
 }
 
@@ -169,13 +157,17 @@ label {
     justify-content: center;
 }
 
+.score {
+    display: flex;
+    height: calc(100vh - 110px);
+    border: 2px solid black;
+}
+
 .scoreboard {
     width: max-content;
-    min-width: 300px;
-    margin-left: 20px;
+    min-width: 100%;
     background-color: black;
     color: white;
-    border: 2px solid #ED760A;
     font-family: 'VT323', monospace;
     letter-spacing: 1px;
 }
@@ -200,4 +192,49 @@ label {
 .rules {
     max-width: 960px;
     margin: 0 auto;
+}
+
+.qr {
+    max-width: 600px;
+    max-height: 48vh;
+}
+
+.joinin {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+}
+
+.joinin-title {
+    margin: 0;
+    text-align: left;
+}
+
+.hackthon-title {
+    font-size: 1.6rem;
+    text-align: left;
+}
+
+.hackathon {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-self: flex-end;
+    width: calc(100% - 2rem);
+    margin-top: auto;
+    padding: 1rem;
+    background-color: #ED760A;
+}
+
+.hackathon-qr {
+    max-width: 40%;
+    display: block;
+    flex-shrink: 0;
+    margin-left: 2rem;
+}
+
+.hackathon-link {
+    color: white;
 }
