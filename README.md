@@ -1,5 +1,7 @@
 # ably-rock-paper-scissors
 
+[![Discord](https://img.shields.io/discord/413156098993029120.svg)](https://discord.gg/7qWKqdQWYB) 
+
 This project contains a multiplayer game in which players battle as ever-changing hand shapes of rock, paper, and scissors.
 
 ## Running it
