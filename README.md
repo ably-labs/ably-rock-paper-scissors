@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This project is no longer being maintained as of March 2026.
+
 # ably-rock-paper-scissors
 
 [![Discord](https://img.shields.io/discord/823552399909584908?label=Get%20help&style=for-the-badge)](https://discord.gg/7qWKqdQWYB) 
